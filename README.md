@@ -1,17 +1,12 @@
 # Nexora
 
-Nexora is a modern cloud storage and file sharing platform.
+A modern cloud storage platform.
 
-## Status
-
-Version: 0.1.0
-
-## Goals
+## Features
 
 - Upload files
 - Download files
 - Share files
-- Modern UI
-- Android App
+- Secure storage
 
-Developed with ❤️ using Flask.
+Status: Under Development
