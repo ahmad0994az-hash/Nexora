@@ -10,7 +10,7 @@
 <title>Nexora</title>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3767497676338258"
-     crossorigin="anonymous"></script>
+crossorigin="anonymous"></script>
 
 <link rel="stylesheet"
 href="{{ url_for('static', filename='css/style.css') }}">
@@ -70,6 +70,7 @@ onclick="closeMenu()">
 
 </div>
 
+
 <nav>
 
 <div class="menu-btn"
@@ -87,19 +88,17 @@ Nexora
 
 </nav>
 
+
 <div class="hero">
 
 <h1>
-
 نيكسورا
-
 </h1>
 
 <p>
-
 منصة حديثة للتخزين السحابي ومشاركة الملفات بسهولة وأمان.
-
 </p>
+
 
 <div class="buttons">
 
@@ -113,6 +112,7 @@ class="btn upload">
 
 </a>
 
+
 <a
 href="/my-files"
 class="btn import">
@@ -120,6 +120,7 @@ class="btn import">
 📁 ملفاتي
 
 </a>
+
 
 {% else %}
 
@@ -130,6 +131,7 @@ class="btn upload">
 🔐 تسجيل الدخول
 
 </a>
+
 
 <a
 href="/register"
@@ -144,6 +146,45 @@ class="btn import">
 </div>
 
 </div>
+
+
+<!-- مساحة إعلان مستقبلية -->
+
+<div class="ad-box">
+
+إعلان
+
+</div>
+
+
+<footer>
+
+<p>
+© 2026 Nexora - جميع الحقوق محفوظة
+</p>
+
+<p>
+
+<a href="/privacy">
+سياسة الخصوصية
+</a>
+
+|
+
+<a href="/terms">
+شروط الاستخدام
+</a>
+
+|
+
+<a href="/contact">
+اتصل بنا
+</a>
+
+</p>
+
+</footer>
+
 
 <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
 

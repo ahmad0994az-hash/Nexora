@@ -39,6 +39,30 @@ def register_routes(app):
         )
 
 
+    @app.route("/privacy")
+    def privacy():
+
+        return render_template(
+            "privacy.html"
+        )
+
+
+    @app.route("/terms")
+    def terms():
+
+        return render_template(
+            "terms.html"
+        )
+
+
+    @app.route("/contact")
+    def contact():
+
+        return render_template(
+            "contact.html"
+        )
+
+
     @app.route("/account")
     @login_required
     def account():
@@ -173,21 +197,17 @@ def register_routes(app):
         if not file:
             abort(404)
 
-
         filepath = os.path.join(
             app.config["UPLOAD_FOLDER"],
             file.saved_name
         )
 
-
         if os.path.exists(filepath):
             os.remove(filepath)
-
 
         db.session.delete(file)
 
         db.session.commit()
-
 
         return redirect(
             url_for("my_files")
@@ -206,11 +226,9 @@ def register_routes(app):
         if not file:
             abort(404)
 
-
         new_name = request.form.get(
             "name"
         ).strip()
-
 
         if new_name:
 
@@ -218,7 +236,7 @@ def register_routes(app):
 
             db.session.commit()
 
-
         return redirect(
             url_for("my_files")
         )
+
