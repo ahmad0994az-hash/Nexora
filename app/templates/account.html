@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الحساب | Nexora</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="menu-btn"
+onclick="openMenu()">
+
+☰
+
+</div>
+
+<div class="logo">
+
+Nexora
+
+</div>
+
+</nav>
+
+<div id="overlay" onclick="closeMenu()"></div>
+
+<div id="sidebar">
+
+<div class="sidebar-header">
+
+<h2>Nexora</h2>
+
+<span class="close-btn"
+onclick="closeMenu()">✕</span>
+
+</div>
+
+<ul>
+
+<li><a href="/">🏠 الرئيسية</a></li>
+
+<li><a href="/upload">📤 رفع الملفات</a></li>
+
+<li><a href="/account">👤 الحساب</a></li>
+
+<li><a href="/settings">⚙️ الإعدادات</a></li>
+
+<li><a href="/logout">🚪 تسجيل الخروج</a></li>
+
+</ul>
+
+</div>
+
+<div class="hero">
+
+<h1>
+
+👤 حسابي
+
+</h1>
+
+<br>
+
+<p>
+
+<b>اسم المستخدم</b>
+
+<br><br>
+
+{{ current_user.username }}
+
+</p>
+
+<br>
+
+<p>
+
+<b>البريد الإلكتروني</b>
+
+<br><br>
+
+{{ current_user.email }}
+
+</p>
+
+<br>
+
+<p>
+
+<b>تاريخ إنشاء الحساب</b>
+
+<br><br>
+
+{{ current_user.created_at.strftime("%Y-%m-%d") }}
+
+</p>
+
+<br>
+
+<p>
+
+<b>عدد الملفات</b>
+
+<br><br>
+
+{{ current_user.files|length }}
+
+</p>
+
+<br>
+
+<a
+href="/settings"
+class="btn upload">
+
+⚙️ الإعدادات
+
+</a>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+</body>
+
+</html>

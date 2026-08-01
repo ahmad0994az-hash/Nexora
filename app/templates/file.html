@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>{{ file.original_name }} | Nexora</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="hero">
+
+<div style="font-size:90px;margin-bottom:20px;">
+
+📄
+
+</div>
+
+<h1>
+
+{{ file.original_name }}
+
+</h1>
+
+<br>
+
+<div style="text-align:right;line-height:2;">
+
+<p>
+
+📦 الحجم
+
+<strong>
+
+{{ (file.file_size/1024)|round(2) }} KB
+
+</strong>
+
+</p>
+
+<p>
+
+⬇ التنزيلات
+
+<strong>
+
+{{ file.downloads }}
+
+</strong>
+
+</p>
+
+<p>
+
+📅 تاريخ الرفع
+
+<strong>
+
+{{ file.uploaded_at.strftime('%d/%m/%Y') }}
+
+</strong>
+
+</p>
+
+</div>
+
+<br>
+
+<div class="buttons">
+
+<a
+href="{{ url_for('download', token=file.token) }}"
+class="btn upload">
+
+⬇ تنزيل الملف
+
+</a>
+
+<button
+type="button"
+class="btn import"
+onclick="copyLink()">
+
+📋 نسخ الرابط
+
+</button>
+
+</div>
+
+<br>
+
+<a
+href="/"
+class="btn import">
+
+🏠 العودة للرئيسية
+
+</a>
+
+<input
+id="shareLink"
+type="hidden"
+value="{{ request.url }}">
+
+<p
+id="copySuccess"
+style="display:none;margin-top:20px;color:#34D399;font-weight:bold;">
+
+✅ تم نسخ الرابط
+
+</p>
+
+</div>
+
+<script>
+
+function copyLink(){
+
+navigator.clipboard.writeText(
+
+document.getElementById("shareLink").value
+
+);
+
+const msg=document.getElementById("copySuccess");
+
+msg.style.display="block";
+
+setTimeout(function(){
+
+msg.style.display="none";
+
+},1800);
+
+}
+
+</script>
+
+</body>
+
+</html>

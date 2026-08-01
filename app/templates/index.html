@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nexora</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div id="overlay" onclick="closeMenu()"></div>
+
+<div id="sidebar">
+
+<div class="sidebar-header">
+
+<h2>Nexora</h2>
+
+<span class="close-btn"
+onclick="closeMenu()">
+
+✕
+
+</span>
+
+</div>
+
+<ul>
+
+<li><a href="/">🏠 الرئيسية</a></li>
+
+{% if current_user.is_authenticated %}
+
+<li><a href="/my-files">📁 ملفاتي</a></li>
+
+<li><a href="/upload">📤 رفع الملفات</a></li>
+
+<li><a href="#">🔗 استيراد رابط</a></li>
+
+<hr>
+
+<li><a href="/account">👤 الحساب</a></li>
+
+<li><a href="/settings">⚙️ الإعدادات</a></li>
+
+<hr>
+
+<li><a href="/logout">🚪 تسجيل الخروج</a></li>
+
+{% else %}
+
+<li><a href="/login">🔐 تسجيل الدخول</a></li>
+
+<li><a href="/register">📝 إنشاء حساب</a></li>
+
+{% endif %}
+
+</ul>
+
+</div>
+
+<nav>
+
+<div class="menu-btn"
+onclick="openMenu()">
+
+☰
+
+</div>
+
+<div class="logo">
+
+Nexora
+
+</div>
+
+</nav>
+
+<div class="hero">
+
+<h1>
+
+نيكسورا
+
+</h1>
+
+<p>
+
+منصة حديثة للتخزين السحابي ومشاركة الملفات بسهولة وأمان.
+
+</p>
+
+<div class="buttons">
+
+{% if current_user.is_authenticated %}
+
+<a
+href="/upload"
+class="btn upload">
+
+📤 رفع الملفات
+
+</a>
+
+<a
+href="/my-files"
+class="btn import">
+
+📁 ملفاتي
+
+</a>
+
+{% else %}
+
+<a
+href="/login"
+class="btn upload">
+
+🔐 تسجيل الدخول
+
+</a>
+
+<a
+href="/register"
+class="btn import">
+
+📝 إنشاء حساب
+
+</a>
+
+{% endif %}
+
+</div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+</body>
+
+</html>

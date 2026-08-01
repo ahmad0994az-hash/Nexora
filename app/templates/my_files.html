@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ملفاتي | Nexora</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div id="overlay" onclick="closeMenu()"></div>
+
+<div id="sidebar">
+
+<div class="sidebar-header">
+
+<h2>Nexora</h2>
+
+<span class="close-btn"
+onclick="closeMenu()">✕</span>
+
+</div>
+
+<ul>
+
+<li><a href="/">🏠 الرئيسية</a></li>
+
+<li><a href="/upload">📤 رفع الملفات</a></li>
+
+<li><a href="/my-files">📁 ملفاتي</a></li>
+
+<li><a href="/account">👤 الحساب</a></li>
+
+<li><a href="/settings">⚙️ الإعدادات</a></li>
+
+<li><a href="/logout">🚪 تسجيل الخروج</a></li>
+
+</ul>
+
+</div>
+
+<nav>
+
+<div class="menu-btn"
+onclick="openMenu()">☰</div>
+
+<div class="logo">Nexora</div>
+
+</nav>
+
+<div class="hero">
+
+<h1>📁 ملفاتي</h1>
+
+{% if files %}
+
+{% for file in files %}
+
+<div class="file-card">
+
+<h3>{{ file.original_name }}</h3>
+
+<p>📦 {{ file.file_size }} Bytes</p>
+
+<p>⬇️ {{ file.downloads }} تنزيل</p>
+
+<p>📅 {{ file.uploaded_at.strftime("%Y-%m-%d") }}</p>
+
+<div class="buttons">
+
+<a
+class="btn import"
+href="/f/{{ file.token }}">
+
+🔗 الرابط
+
+</a>
+
+<a
+class="btn upload"
+href="/download/{{ file.token }}">
+
+⬇️ تنزيل
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<p>
+
+لا توجد ملفات بعد.
+
+</p>
+
+{% endif %}
+
+</div>
+
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>رفع ملف | Nexora</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="hero">
+
+<h1>
+
+رفع ملف
+
+</h1>
+
+<p>
+
+ارفع ملفك وسيتم إنشاء رابط مشاركة مباشر.
+
+</p>
+
+<form
+method="POST"
+enctype="multipart/form-data">
+
+<input
+type="file"
+name="file"
+required>
+
+<br><br>
+
+<button
+class="btn upload"
+type="submit">
+
+⬆ رفع الملف
+
+</button>
+
+<a
+href="/"
+class="btn import">
+
+🏠 الرئيسية
+
+</a>
+
+</form>
+
+{% if message %}
+
+<div class="info-box">
+
+<h3>
+
+{{ message }}
+
+</h3>
+
+{% endif %}
+
+{% if share_url %}
+
+<p>
+
+🔗 رابط المشاركة
+
+</p>
+
+<input
+
+id="shareLink"
+
+type="text"
+
+readonly
+
+value="{{ share_url }}">
+
+<br><br>
+
+<button
+
+type="button"
+
+class="btn upload"
+
+onclick="copyLink()">
+
+📋 نسخ الرابط
+
+</button>
+
+<a
+
+href="{{ share_url }}"
+
+class="btn import">
+
+📄 فتح صفحة الملف
+
+</a>
+
+<p
+
+id="copySuccess"
+
+style="display:none; margin-top:10px; color:#00ff99;">
+
+✅ تم نسخ الرابط
+
+</p>
+
+{% endif %}
+
+</div>
+
+</div>
+
+<script>
+
+function copyLink(){
+
+const input=document.getElementById("shareLink");
+
+input.select();
+
+input.setSelectionRange(0,99999);
+
+navigator.clipboard.writeText(input.value);
+
+document.getElementById("copySuccess").style.display="block";
+
+setTimeout(function(){
+
+document.getElementById("copySuccess").style.display="none";
+
+},2000);
+
+}
+
+</script>
+
+</body>
+
+</html>
