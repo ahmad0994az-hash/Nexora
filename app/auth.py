@@ -24,6 +24,7 @@ from .models import User
 
 def register_auth(app):
 
+
     @app.route("/register", methods=["GET", "POST"])
     def register():
 
@@ -38,13 +39,20 @@ def register_auth(app):
 
             password = request.form["password"]
 
+
             if User.query.filter_by(username=username).first():
+
                 flash("اسم المستخدم مستخدم بالفعل.")
+
                 return redirect(url_for("register"))
 
+
             if User.query.filter_by(email=email).first():
+
                 flash("البريد الإلكتروني مستخدم بالفعل.")
+
                 return redirect(url_for("register"))
+
 
             user = User(
                 username=username,
@@ -52,14 +60,20 @@ def register_auth(app):
                 password_hash=generate_password_hash(password)
             )
 
+
             db.session.add(user)
+
             db.session.commit()
+
 
             login_user(user)
 
+
             return redirect(url_for("home"))
 
+
         return render_template("register.html")
+
 
 
     @app.route("/login", methods=["GET", "POST"])
@@ -68,13 +82,18 @@ def register_auth(app):
         if current_user.is_authenticated:
             return redirect(url_for("home"))
 
+
         if request.method == "POST":
 
             email = request.form["email"].strip().lower()
 
             password = request.form["password"]
 
-            user = User.query.filter_by(email=email).first()
+
+            user = User.query.filter_by(
+                email=email
+            ).first()
+
 
             if user and check_password_hash(
                 user.password_hash,
@@ -85,9 +104,57 @@ def register_auth(app):
 
                 return redirect(url_for("home"))
 
+
             flash("البريد الإلكتروني أو كلمة المرور غير صحيحة.")
 
+
         return render_template("login.html")
+
+
+
+    @app.route("/settings", methods=["GET", "POST"])
+    @login_required
+    def settings():
+
+        if request.method == "POST":
+
+            new_email = request.form.get(
+                "email"
+            ).strip().lower()
+
+
+            new_password = request.form.get(
+                "password"
+            )
+
+
+            if new_email:
+
+                current_user.email = new_email
+
+
+            if new_password:
+
+                current_user.password_hash = generate_password_hash(
+                    new_password
+                )
+
+
+            db.session.commit()
+
+
+            flash("تم تحديث الإعدادات بنجاح ✅")
+
+
+            return redirect(
+                url_for("settings")
+            )
+
+
+        return render_template(
+            "settings.html"
+        )
+
 
 
     @app.route("/logout")
@@ -96,5 +163,6 @@ def register_auth(app):
 
         logout_user()
 
-        return redirect(url_for("home"))
-
+        return redirect(
+            url_for("home")
+        )

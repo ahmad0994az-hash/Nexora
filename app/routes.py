@@ -6,7 +6,8 @@ from flask import (
     request,
     send_file,
     abort,
-    url_for
+    url_for,
+    redirect
 )
 
 from flask_login import (
@@ -159,3 +160,65 @@ def register_routes(app):
             download_name=file.original_name
         )
 
+
+    @app.route("/delete/<token>")
+    @login_required
+    def delete_file(token):
+
+        file = File.query.filter_by(
+            token=token,
+            user_id=current_user.id
+        ).first()
+
+        if not file:
+            abort(404)
+
+
+        filepath = os.path.join(
+            app.config["UPLOAD_FOLDER"],
+            file.saved_name
+        )
+
+
+        if os.path.exists(filepath):
+            os.remove(filepath)
+
+
+        db.session.delete(file)
+
+        db.session.commit()
+
+
+        return redirect(
+            url_for("my_files")
+        )
+
+
+    @app.route("/rename/<token>", methods=["POST"])
+    @login_required
+    def rename_file(token):
+
+        file = File.query.filter_by(
+            token=token,
+            user_id=current_user.id
+        ).first()
+
+        if not file:
+            abort(404)
+
+
+        new_name = request.form.get(
+            "name"
+        ).strip()
+
+
+        if new_name:
+
+            file.original_name = new_name
+
+            db.session.commit()
+
+
+        return redirect(
+            url_for("my_files")
+        )

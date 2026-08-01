@@ -32,57 +32,84 @@ onclick="closeMenu()">✕</span>
 <ul>
 
 <li><a href="/">🏠 الرئيسية</a></li>
-
 <li><a href="/upload">📤 رفع الملفات</a></li>
-
 <li><a href="/my-files">📁 ملفاتي</a></li>
-
 <li><a href="/account">👤 الحساب</a></li>
-
 <li><a href="/settings">⚙️ الإعدادات</a></li>
-
 <li><a href="/logout">🚪 تسجيل الخروج</a></li>
 
 </ul>
 
 </div>
 
+
 <nav>
 
 <div class="menu-btn"
 onclick="openMenu()">☰</div>
 
-<div class="logo">Nexora</div>
+<div class="logo">
+Nexora
+</div>
 
 </nav>
+
 
 <div class="hero">
 
 <h1>📁 ملفاتي</h1>
 
+
 {% if files %}
 
 {% for file in files %}
 
+
 <div class="file-card">
 
-<h3>{{ file.original_name }}</h3>
 
-<p>📦 {{ file.file_size }} Bytes</p>
+<h3>
+📄 {{ file.original_name }}
+</h3>
 
-<p>⬇️ {{ file.downloads }} تنزيل</p>
 
-<p>📅 {{ file.uploaded_at.strftime("%Y-%m-%d") }}</p>
+<p>
+📦 الحجم:
+<strong>
+{{ (file.file_size / 1024)|round(2) }} KB
+</strong>
+</p>
+
+
+<p>
+⬇️ التنزيلات:
+<strong>
+{{ file.downloads }}
+</strong>
+</p>
+
+
+<p>
+📅 الرفع:
+<strong>
+{{ file.uploaded_at.strftime("%Y-%m-%d") }}
+</strong>
+</p>
+
+
 
 <div class="buttons">
+
 
 <a
 class="btn import"
 href="/f/{{ file.token }}">
 
-🔗 الرابط
+🔗 فتح الرابط
 
 </a>
+
+
 
 <a
 class="btn upload"
@@ -92,25 +119,86 @@ href="/download/{{ file.token }}">
 
 </a>
 
-</div>
+
+
+<button
+class="btn"
+onclick="copyLink('{{ request.host_url }}f/{{ file.token }}')">
+
+📋 نسخ
+
+</button>
+
+
+<form
+method="POST"
+action="/rename/{{ file.token }}"
+style="display:inline;">
+
+<input
+type="text"
+name="name"
+placeholder="الاسم الجديد"
+required>
+
+<button
+class="btn"
+type="submit">
+
+✏️ تعديل
+
+</button>
+
+</form>
+
+
+
+<a
+class="btn"
+href="/delete/{{ file.token }}"
+onclick="return confirm('هل تريد حذف هذا الملف؟');">
+
+🗑 حذف
+
+</a>
+
 
 </div>
+
+
+</div>
+
 
 {% endfor %}
+
 
 {% else %}
 
 <p>
-
 لا توجد ملفات بعد.
-
 </p>
 
 {% endif %}
 
+
 </div>
 
+
 <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+
+<script>
+
+function copyLink(link){
+
+navigator.clipboard.writeText(link);
+
+alert("✅ تم نسخ الرابط");
+
+}
+
+</script>
+
 
 </body>
 

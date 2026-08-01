@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الإعدادات | Nexora</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div id="overlay" onclick="closeMenu()"></div>
+
+
+<div id="sidebar">
+
+<div class="sidebar-header">
+
+<h2>Nexora</h2>
+
+<span class="close-btn"
+onclick="closeMenu()">✕</span>
+
+</div>
+
+
+<ul>
+
+<li><a href="/">🏠 الرئيسية</a></li>
+
+<li><a href="/upload">📤 رفع الملفات</a></li>
+
+<li><a href="/my-files">📁 ملفاتي</a></li>
+
+<li><a href="/account">👤 الحساب</a></li>
+
+<li><a href="/settings">⚙️ الإعدادات</a></li>
+
+<li><a href="/logout">🚪 تسجيل الخروج</a></li>
+
+</ul>
+
+</div>
+
+
+
+<nav>
+
+<div class="menu-btn"
+onclick="openMenu()">
+
+☰
+
+</div>
+
+
+<div class="logo">
+
+Nexora
+
+</div>
+
+</nav>
+
+
+
+
+<div class="hero">
+
+
+<h1>
+
+⚙️ الإعدادات
+
+</h1>
+
+
+
+<form method="POST">
+
+
+
+<p>
+
+📧 البريد الإلكتروني
+
+</p>
+
+
+<input
+
+type="email"
+
+name="email"
+
+value="{{ current_user.email }}"
+
+>
+
+
+
+<br>
+
+
+
+<p>
+
+🔐 كلمة المرور الجديدة
+
+</p>
+
+
+<input
+
+type="password"
+
+name="password"
+
+placeholder="اتركها فارغة إذا لا تريد التغيير"
+
+>
+
+
+
+<br><br>
+
+
+
+<button
+
+class="btn upload"
+
+type="submit">
+
+💾 حفظ التغييرات
+
+</button>
+
+
+</form>
+
+
+
+</div>
+
+
+
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+
+</body>
+
+</html>
