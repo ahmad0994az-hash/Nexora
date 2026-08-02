@@ -13,6 +13,10 @@ content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
 href="{{ url_for('static', filename='css/style.css') }}">
 
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3767497676338258"
+crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -20,15 +24,11 @@ href="{{ url_for('static', filename='css/style.css') }}">
 <div class="hero">
 
 <div style="font-size:90px;margin-bottom:20px;">
-
 📄
-
 </div>
 
 <h1>
-
 {{ file.original_name }}
-
 </h1>
 
 <br>
@@ -36,44 +36,55 @@ href="{{ url_for('static', filename='css/style.css') }}">
 <div style="text-align:right;line-height:2;">
 
 <p>
-
 📦 الحجم
 
 <strong>
-
 {{ (file.file_size/1024)|round(2) }} KB
-
 </strong>
-
 </p>
 
 <p>
-
 ⬇ التنزيلات
 
 <strong>
-
 {{ file.downloads }}
-
 </strong>
-
 </p>
 
 <p>
-
 📅 تاريخ الرفع
 
 <strong>
-
 {{ file.uploaded_at.strftime('%d/%m/%Y') }}
-
 </strong>
-
 </p>
 
 </div>
 
+
 <br>
+
+
+<!-- AdSense -->
+
+<div class="ad-box">
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3767497676338258"
+     data-ad-slot="auto"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+<br>
+
 
 <div class="buttons">
 
@@ -84,6 +95,7 @@ class="btn upload">
 ⬇ تنزيل الملف
 
 </a>
+
 
 <button
 type="button"
@@ -96,7 +108,9 @@ onclick="copyLink()">
 
 </div>
 
+
 <br>
+
 
 <a
 href="/"
@@ -106,10 +120,12 @@ class="btn import">
 
 </a>
 
+
 <input
 id="shareLink"
 type="hidden"
 value="{{ request.url }}">
+
 
 <p
 id="copySuccess"
@@ -119,16 +135,16 @@ style="display:none;margin-top:20px;color:#34D399;font-weight:bold;">
 
 </p>
 
+
 </div>
+
 
 <script>
 
 function copyLink(){
 
 navigator.clipboard.writeText(
-
 document.getElementById("shareLink").value
-
 );
 
 const msg=document.getElementById("copySuccess");
@@ -144,6 +160,7 @@ msg.style.display="none";
 }
 
 </script>
+
 
 </body>
 
